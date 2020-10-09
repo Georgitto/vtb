@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <style type="text/css">
+        .registration {
+            margin-top: 15%;
+        }
+        .name {
+            margin-top: 20%;
+        }
+    </style>
+</head>
+<body>
+    <script src="registration.js"></script>
+    <div class="registration">
+        <div class="tile is-ancestor">
+            <div class="tile is-3 is-vertical is-parent">
+                <div class="tile is-child box">
+                    <div class="name">
+                        <p class="title">Регитсрация</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tile is-parent">
+                <div class="tile is-child box">
+                    <div class="field">
+                        <label class="label">Логин пользователя</label>
+                        <div class="control">
+                            <input id="log" class="input" type="text" placeholder="Введите логин">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Пароль</label>
+                        <div class="control">
+                            <input id="pass" class="input" type="password" placeholder="Введите пароль">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button is-light" onclick="getUserData()">
+                                Войти
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
