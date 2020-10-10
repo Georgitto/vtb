@@ -1,16 +1,11 @@
 function getUserData() {
 
-    String.prototype.replaceAll = function(search, replacement) {
-        var target = this;
-        return target.replace(new RegExp(search, 'g'), replacement);
-    };
-
     let userName = document.getElementById('log').value;
     let userPassword = document.getElementById('pass').value;
     let secretWord = document.getElementById('word').value;
     let max_length = 20;
 
-    let word_hash = get_hash(secretWord, max_length);
+    let word_hash = get_hash_from_server(secretWord, max_length);
     let token = userName + userPassword;
     let key = get_random_string(token.length);
     let secret_token = xor(token, key);
@@ -20,8 +15,8 @@ function getUserData() {
 
     console.log("Токен: " + token);
     console.log("Хэш от секретного слова: " + word_hash);
-    console.log("Ключ, созданный на длине токена: " + key);
-    console.log("Скрытый токен: " + secret_token);
+    console.log("Ключ, созданный по длине токена: " + key);
+    console.log("Зашифрованный токен: " + secret_token);
     console.log("Скрытый ключ: " + secret_key);
     console.log("Полученный ключ: " + exctracted_key);
     console.log("Полученный токен: " + decoded_token);
@@ -69,12 +64,12 @@ function get_key_from_server(id) {
     console.log(JSON.parse(xh.response).key);
 }
 
-function get_hash(word, max_length) {
+function get_hash_from_server(word, max_length) {
     // let hash = 0
     // for (let i = 0; i < word.length; i++) {
     //     hash = (hash + word.charCodeAt(i) * 348937913) % max_length;
     // }
-    // console.log('http://89.223.94.132:8000/hash?text=' + word);
+
     let xhr = new XMLHttpRequest();
     xhr.open('GET','http://89.223.94.132:8000/hash?text=' + word, false);
     xhr.send();
@@ -84,7 +79,7 @@ function get_hash(word, max_length) {
         }
     };
     let hash = JSON.parse(xhr.response);
-    return hash.hash;
+    return hash.hash % max_length;
 }
 
 function get_random_string(length) {
@@ -121,6 +116,6 @@ function xor(s1, s2) {
 }
 
 function extract_key_by_word(secret_key, key_length, word, max_length) {
-    let word_hash = get_hash(word, max_length)
-    return secret_key.substr(word_hash, word_hash + key_length)
+    let word_hash = get_hash_from_server(word, max_length);
+    return secret_key.substr(word_hash, key_length);
 }
