@@ -48,9 +48,9 @@
             return secret_key.substr(word_hash, word_hash + key_length)
         }
 
-        let word = "олово"
+        let word = "dad"
         let word_hash = get_hash(word)
-        let token = "token_for_access"
+        let token = "Andrey123"
         let key = get_random_string(token.length)
         let secret_token = xor(token, key)
         let secret_key = concat_key_with_random(key, word_hash, max_length)
