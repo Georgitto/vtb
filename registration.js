@@ -18,13 +18,13 @@ function getUserData() {
     console.log("Ключ, созданный по длине токена: " + key);
     console.log("Зашифрованный токен: " + secret_token);
     console.log("Скрытый ключ: " + secret_key);
-    console.log("Полученный ключ: " + exctracted_key);
-    console.log("Полученный токен: " + decoded_token);
 
     let random_id = generateId();
     add_to_cookie('randId', random_id);
-    add_to_cookie('secretToken', secret_token);
+    add_to_cookie('secretToken', encodeURIComponent(secret_token));
     add_key_to_server(random_id, secret_key);
+
+    document.cookie = `extracted_key = ${exctracted_key}`;
 }
 
 function generateId() {
@@ -32,7 +32,7 @@ function generateId() {
 }
 
 function add_to_cookie(key, value) {
-    document.cookie = `${encodeURIComponent(key)} = ${encodeURIComponent(value)}`;
+    document.cookie = `${key}=${value}`;
 }
 
 function add_key_to_server(id, secret_key) {
@@ -50,18 +50,6 @@ function add_key_to_server(id, secret_key) {
             alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
         }
     };
-}
-
-function get_key_from_server(id) {
-    let xh = new XMLHttpRequest();
-    xh.open('GET','http://89.223.94.132:8000/key/' + id, false);
-    xh.send();
-    xh.onload = function() {
-        if (xh.status != 200) {
-            alert(`Ошибка ${xh.status}: ${xh.statusText}`);
-        }
-    };
-    console.log(JSON.parse(xh.response).key);
 }
 
 function get_hash_from_server(word, max_length) {
@@ -91,8 +79,9 @@ function get_random_string(length) {
 }
 
 function get_random_char() {
-    let i = Math.random() * 1000 % 128;
-    return String.fromCharCode(i);
+    let dictionary = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let i = Math.round(Math.random() *1000 % 62);
+    return dictionary[i];
 }
 
 function concat_key_with_random(key, length, max_length) {
