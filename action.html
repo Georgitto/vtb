@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Совершить платеж</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="shortcut icon" href="#" />
+    <style type="text/css">
+        .action {
+            margin-left: 35%;
+            margin-top: 10%;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let x = prompt('Введите секретное слово: ');
+    </script>
+    <script src="action.js"></script>
+    <div class="action">
+        <div class="tile is-6 is-vertical">
+            <div class="tile is-child box">
+                <div class="name">
+                    <p class="title">Выполнение платежа</p>
+                    <div class="field">
+                        <label class="label">Номер карты</label>
+                        <div class="control">
+                            <input id="cardNumber" class="input" type="text" placeholder="Введите номер" value="0505 9876 4532 3456">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Сумма перевода</label>
+                        <div class="control">
+                            <input id="amount" class="input" type="number" placeholder="Введите сумму" value="10000">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <button class="button is-light" onclick="resolveTransfer()">
+                            Перевести
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
