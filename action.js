@@ -7,7 +7,7 @@ function resolveTransfer() {
     let extractedKey =  extract_key_by_word(secretKey, secretToken.length, secretWord, 20); //при проверке изменить последний параметр на 180000
     let decodedToken = xor(secretToken, extractedKey);
     console.log("extractedKey: "+extractedKey);
-    console.log("decodeToken: "+decodedToken);
+    console.log("decodedToken: "+decodedToken);
 }
 
 function get_data_from_cookie(key) {
